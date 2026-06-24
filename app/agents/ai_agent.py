@@ -20,11 +20,13 @@ def perform_actions(question: str) -> dict:
     Possible questions - 
     1. EMPLOYEE_LOOKUP
     2. CREATE_TICKET
-    3. GENERAL_QUERY
+    3. TICKET_SEARCH
+    4. GENERAL_QUERY
 
     Rules - 
     - If the user asks regarding an employee, use EMPLOYEE_LOOKUP
     - If the user asks to create or raise a ticket, use CREATE_TICKET
+    - If the user asks to search for a ticket, use TICKET_SEARCH
     - Otherwise use GENERAL_QUERY
 
     Return JSON only
@@ -47,6 +49,15 @@ def perform_actions(question: str) -> dict:
     {{
         "action":"CREATE_TICKET",
         "issue":"VPN issue"
+    }}
+
+    User:
+    Search for a ticket INC-1234
+
+    Output:
+    {{
+        "action":"TICKET_SEARCH",
+        "ticket":"INC-1234"
     }}
 
     User:
@@ -110,7 +121,7 @@ def answer_general_questions(question: str) -> str:
         return f"Unable to generate content: {str(e)}"
 
 if __name__ == "__main__":
-    # pass
+    pass
     # print(perform_actions("Show details of employee E105"))
     # print(perform_actions("My system is broken"))
-    print(perform_actions("What is the onboarding process?"))
+    # print(perform_actions("What is the onboarding process?"))

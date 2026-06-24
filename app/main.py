@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.models.models import QuestionRequest
 from app.agents.ai_agent import perform_actions, answer_general_questions
 from app.services.employee_data import get_employee_by_id, get_employee_by_name
-from app.services.ticket_service import create_ticket, get_all_ticket
+from app.services.ticket_service import create_ticket, get_all_ticket, get_ticket_info
 
 app = FastAPI(
     title='Fluid Assistant',
@@ -30,12 +30,16 @@ def ask(request: QuestionRequest):
         employee = None
         emp_id = action_data.get('employee_id')
         emp_name = action_data.get('employee_name')
+        
 
         if emp_id:
             employee = get_employee_by_id(emp_id)
 
         elif emp_name:
             employee = get_employee_by_name(emp_name)
+
+        elif ticket_id:
+            ticket_info = get_ticket_info(ticket_id)
 
         if employee:
 
@@ -44,7 +48,7 @@ def ask(request: QuestionRequest):
                 "task" : "employee_lookup",
                 "data" : employee
             }
-        
+                
         return {
             "success" : False,
             "message" : "Employee not found"
@@ -66,6 +70,23 @@ def ask(request: QuestionRequest):
             "data" : ticket
         }
     
+    elif intent == "TICKET_SEARCH":
+        ticket_id = action_data.get('ticket')
+        
+        if not ticket_id:
+            return{
+                "success" : False,
+                "message" : "Ticket information missing"
+            }
+        ticket_info = get_ticket_info(ticket_id)
+
+        return {
+                "success" : True,
+                "task" : "ticket_search",
+                "data" : ticket_info
+            } 
+
+    
     else:
         answer = answer_general_questions(
             question
@@ -84,3 +105,5 @@ def tickets():
     Get method to return all the existing tickets from the database.
     """
     return get_all_ticket()
+
+

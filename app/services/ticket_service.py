@@ -39,7 +39,19 @@ def get_all_ticket() -> dict:
 
     return [dict(row) for row in rows]
 
+def get_ticket_info(ticket_id) -> dict | None:
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""select * from ticket where ticket_id = ?""", (ticket_id,))
+
+    ticket_info = cursor.fetchone()
+
+    conn.close()
+
+    return dict(ticket_info) if  ticket_info else None
 
 if __name__ == "__main__":
+    pass
     # print(get_all_ticket())
-    print(create_ticket('System broken'))
+    # print(create_ticket('System broken'))
