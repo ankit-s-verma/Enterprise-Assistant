@@ -24,30 +24,6 @@ An AI-powered enterprise assistant built with FastAPI, SQLite, and Google Gemini
 
 ---
 
-## Demo Screenshots
-
-### Swagger UI
-
-![Swagger UI](screenshots/swagger-ui.png)
-
-### Employee Lookup
-
-![Employee Lookup](screenshots/employee-lookup.png)
-
-### Ticket Generation
-
-![Ticket Generation](screenshots/ticket-generation.png)
-
-### General Query
-
-![General Query](screenshots/general-query.png)
-
-### All Tickets
-
-![All Tickets](screenshots/all-tickets.png)
-
----
-
 ## Features
 
 ### Employee Information Lookup
@@ -92,35 +68,6 @@ The assistant uses a language model to classify user intent and route requests t
 
 ---
 
-## Architecture Overview
-
-```text
-                    User
-                      │
-                      ▼
-                 POST /ask
-                      │
-                      ▼
-               AI Intent Layer
-                      │
-         ┌────────────┼────────────┐
-         │            │            │
-         ▼            ▼            ▼
-
- EMPLOYEE_LOOKUP  CREATE_TICKET  GENERAL_QUERY
-         │            │            │
-         ▼            ▼            ▼
-
- SQLite Query   SQLite Insert   LLM Response
-         │            │            │
-         └────────────┼────────────┘
-                      │
-                      ▼
-                   Response
-```
-
----
-
 ## Technology Stack
 
 ### Backend
@@ -143,7 +90,29 @@ The assistant uses a language model to classify user intent and route requests t
 * Pydantic
 
 ---
+## Demo Screenshots
 
+### Swagger UI
+
+![Swagger UI](screenshots/swagger-ui.png)
+
+### Employee Lookup
+
+![Employee Lookup](screenshots/employee-lookup.png)
+
+### Ticket Generation
+
+![Ticket Generation](screenshots/ticket-generation.png)
+
+### General Query
+
+![General Query](screenshots/general-query.png)
+
+### All Tickets
+
+![All Tickets](screenshots/all-tickets.png)
+
+---
 ## Project Structure
 
 ```text
