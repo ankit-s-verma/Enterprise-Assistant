@@ -391,13 +391,5 @@ The application is organized into dedicated modules for AI processing, database 
 ## Author
 
 **Ankit Verma**
-
-MSc Applied Artificial Intelligence
-
-Machine Learning | AI Engineering | FastAPI | Python Development
-
-GitHub: https://github.com/your-github-username
-LinkedIn: https://linkedin.com/in/your-linkedin-profile
-
 ```
 ```
