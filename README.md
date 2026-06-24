@@ -1,10 +1,26 @@
-# AI-Powered Enterprise HR Assistant
+# Enterprise HR Assistant v1.0
 
-## Overview
+An AI-powered enterprise assistant built with FastAPI, SQLite, and Google Gemini. The application can understand natural language requests, retrieve employee information, create support tickets, and answer general enterprise-related questions through a unified API interface.
 
-The AI-Powered Enterprise HR Assistant is a FastAPI-based application that combines Large Language Models (LLMs) with enterprise business actions. The assistant can understand natural language queries, identify user intent, and perform business operations such as employee information retrieval and support ticket creation.
+---
 
-The project demonstrates how AI agents can be integrated with enterprise systems to automate common HR and IT support workflows.
+## Highlights
+
+* AI-powered intent extraction using Google Gemini
+* Employee information retrieval from SQLite
+* Support ticket creation workflow
+* FastAPI REST API with interactive Swagger documentation
+* Pydantic request validation
+* Structured tool-routing architecture
+* Persistent ticket storage
+* Modular service-based backend design
+* Error handling and fallback logic
+
+---
+
+## System Architecture
+
+![System Architecture](screenshots/architecture.png)
 
 ---
 
@@ -12,66 +28,43 @@ The project demonstrates how AI agents can be integrated with enterprise systems
 
 ### Employee Information Lookup
 
-Retrieve employee information from a SQLite database using natural language queries.
+Retrieve employee information using natural language queries.
 
-Examples:
+**Examples**
 
-* Show details of employee E105
-* Get information about Sarah Johnson
-* Find employee E110
+```text
+Show details of employee E105
+Get information about Sarah Johnson
+Find employee E110
+```
 
-### Support Ticket Creation
+### IT Support Ticket Creation
 
-Create IT support tickets through conversational requests.
+Create support tickets through conversational requests.
 
-Examples:
+**Examples**
 
-* Create a ticket for VPN connectivity issues
-* My system is broken
-* Unable to login to the company portal
+```text
+Create a ticket for VPN connectivity issues
+Unable to login to company portal
+My laptop is not working
+```
 
-### General Business Queries
+### General Enterprise Queries
 
-Answer general HR and enterprise-related questions using an LLM.
+Answer HR and enterprise-related questions using an LLM.
 
-Examples:
+**Examples**
 
-* What is the onboarding process?
-* What is employee onboarding?
-* Explain the leave approval workflow
+```text
+What is employee onboarding?
+What is the leave approval process?
+Explain the onboarding workflow
+```
 
 ### AI-Powered Intent Routing
 
-The assistant uses an LLM to classify user intent and route requests to the appropriate business tool instead of relying on keyword matching.
-
----
-
-## Architecture
-
-```text
-                    User
-                      │
-                      ▼
-                 POST /ask
-                      │
-                      ▼
-                AI Intent Layer
-                      │
-         ┌────────────┼────────────┐
-         │            │            │
-         ▼            ▼            ▼
-
- EMPLOYEE_LOOKUP  CREATE_TICKET  GENERAL_QUERY
-         │            │            │
-         ▼            ▼            ▼
-
- SQLite Query   SQLite Insert   LLM Response
-         │            │            │
-         └────────────┼────────────┘
-                      │
-                      ▼
-                   Response
-```
+The assistant uses a language model to classify user intent and route requests to the appropriate business workflow rather than relying on hardcoded keyword matching.
 
 ---
 
@@ -88,183 +81,286 @@ The assistant uses an LLM to classify user intent and route requests to the appr
 
 ### AI Layer
 
-* Google Gemini API
-* Structured Intent Extraction
+* Google Gemini
+* Intent Extraction
+* Tool Routing
 
 ### Validation
 
 * Pydantic
 
 ---
+## Demo Screenshots
 
+### Swagger UI
+
+![Swagger UI](screenshots/swagger-ui.png)
+
+### Employee Lookup
+
+![Employee Lookup](screenshots/employee-lookup.png)
+
+### Ticket Generation
+
+![Ticket Generation](screenshots/ticket-generation.png)
+
+### General Query
+
+![General Query](screenshots/general-query.png)
+
+### All Tickets
+
+![All Tickets](screenshots/all-tickets.png)
+
+---
 ## Project Structure
 
 ```text
 enterprise-hr-assistant/
-
-├── app.py
-├── ai_agent.py
-├── database.py
-├── employee_service.py
-├── ticket_service.py
-├── models.py
-├── company.db
-├── employees.csv
+│
+├── app/
+│   │
+│   ├── main.py
+│   │
+│   ├── agents/
+│   │   └── ai_agent.py
+│   │
+│   ├── database/
+│   │   ├── database.py
+│   │   └── employees.db
+│   │
+│   ├── services/
+│   │   ├── employee_service.py
+│   │   └── ticket_service.py
+│   │
+│   ├── models/
+│   │   └── models.py
+│   │
+│   └── data/
+│       └── employees.csv
+│
+├── screenshots/
+│   ├── architecture.png
+│   ├── swagger-ui.png
+│   ├── employee-lookup.png
+│   ├── ticket-generation.png
+│   ├── all-tickets.png
+│   └── general-query.png
+│
+├── .gitignore
 ├── requirements.txt
-├── Systems Architecture.png
-└── README.md
+├── README.md
+└── LICENSE
 ```
 
 ---
 
-## API Endpoint
+## Installation
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/<your-username>/enterprise-hr-assistant.git
+cd enterprise-hr-assistant
+```
+
+### Create Virtual Environment
+
+#### Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+#### Linux / Mac
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the project root.
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+---
+
+## Running the Application
+
+Start the FastAPI server:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Application URL:
+
+```text
+http://127.0.0.1:8000
+```
+
+Interactive API Documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+---
+
+## API Usage
 
 ### POST /ask
 
-Request:
+#### Request
 
 ```json
 {
-    "question": "Show details of employee E105"
+  "question": "Show details of employee E105"
 }
 ```
 
-Employee Lookup Response:
+#### Employee Lookup Response
 
 ```json
 {
-    "success": true,
-    "action": "employee_lookup",
-    "data": {
-        "employee_id": "E105",
-        "employee_name": "Michael Wilson",
-        "designation": "Software Engineer",
-        "department": "Engineering",
-        "email_id": "michael.wilson@company.com",
-        "phone_no": "+91-9876543205"
-    }
-}
-```
-
-Ticket Creation Response:
-
-```json
-{
-    "success": true,
-    "action": "ticket_created",
-    "data": {
-        "ticket_id": "INC-12345",
-        "status": "OPEN"
-    }
+  "success": true,
+  "action": "employee_lookup",
+  "data": {
+    "employee_id": "E105",
+    "employee_name": "Michael Wilson",
+    "designation": "Software Engineer",
+    "department": "Engineering",
+    "email_id": "michael.wilson@company.com",
+    "phone_no": "+91-9876543205"
+  }
 }
 ```
 
 ---
 
-## Engineering Improvement Implemented
+#### Ticket Creation Request
 
-### API Tool Calling with Intent Routing
+```json
+{
+  "question": "Unable to login to company portal"
+}
+```
 
-Instead of generating only text responses, the assistant uses an LLM to extract structured intent from user queries.
+#### Ticket Creation Response
 
-Example:
+```json
+{
+  "success": true,
+  "action": "ticket_created",
+  "data": {
+    "ticket_id": "INC-12345",
+    "status": "OPEN"
+  }
+}
+```
 
-Input:
+---
+
+## AI Workflow
+
+### Step 1: User Query
 
 ```text
-Create a ticket for VPN connectivity issue
+Show details of employee E105
 ```
 
-Extracted Intent:
+### Step 2: Intent Extraction
+
+The language model converts the natural language query into structured data.
 
 ```json
 {
-    "action": "CREATE_TICKET",
-    "issue": "VPN connectivity issue"
+  "action": "EMPLOYEE_LOOKUP",
+  "employee_id": "E105"
 }
 ```
 
-The extracted intent is then routed to the appropriate business tool.
+### Step 3: Tool Routing
 
-Benefits:
+The application routes the request to the appropriate business service.
 
-* Dynamic business action execution
-* Improved extensibility
-* Reduced reliance on hardcoded keyword matching
-* Better enterprise workflow automation
-
----
-
-## Error Handling and Validation
-
-The application includes:
-
-* Request validation using Pydantic
-* Structured JSON parsing
-* Exception handling for AI service failures
-* Fallback responses for unavailable models
-* Database operation validation
-
----
-
-## Test Cases
-
-### Normal Business Query
-
-Request:
-
-```json
-{
-    "question": "Show details of employee E105"
-}
+```text
+EMPLOYEE_LOOKUP
+      ↓
+Employee Service
+      ↓
+SQLite Query
 ```
 
-Expected Result:
+### Step 4: Response Generation
 
-Employee information is retrieved from SQLite and returned to the user.
-
----
-
-### Challenging Query
-
-Request:
-
-```json
-{
-    "question": "My system is broken"
-}
-```
-
-Expected Result:
-
-The assistant identifies the issue as a support request and creates a support ticket.
+The result is returned to the user through the API.
 
 ---
 
-## Future Improvements
+## Key Concepts Demonstrated
 
-* PostgreSQL integration
-* User authentication and authorization
-* Conversation memory
-* Document Retrieval (RAG)
-* Multi-step agent workflows
-* Ticket status tracking
-* Employee search by department and location
+* FastAPI API Development
+* RESTful Service Design
+* Large Language Model Integration
+* AI Agent Workflows
+* Tool Calling / Function Routing
+* SQLite Database Operations
+* Request Validation with Pydantic
+* Error Handling and Fallback Logic
+* Service-Oriented Architecture
+* Enterprise Workflow Automation
 
 ---
 
-## Tradeoff Discussion
+## Design Decisions
 
-For this implementation, SQLite was chosen over PostgreSQL to reduce setup complexity and accelerate development.
+### SQLite vs PostgreSQL
 
-This decision enabled rapid prototyping while still demonstrating database integration, persistence, and business workflows. In a production environment, PostgreSQL and SQLAlchemy would be preferred for scalability, concurrency support, and maintainability.
+SQLite was selected to simplify deployment while still demonstrating database integration and persistence. The architecture can be migrated to PostgreSQL with minimal modifications.
+
+### LLM-Based Routing vs Keyword Matching
+
+The assistant uses AI-driven intent extraction instead of hardcoded keyword matching. This approach provides greater flexibility and serves as a foundation for future agent-based workflows.
+
+### Modular Architecture
+
+The application is organized into dedicated modules for AI processing, database operations, business services, and API endpoints to improve maintainability and scalability.
+
+---
+
+## Future Enhancements
+
+* PostgreSQL Integration
+* SQLAlchemy ORM
+* User Authentication
+* Role-Based Access Control (RBAC)
+* Retrieval-Augmented Generation (RAG)
+* Conversation Memory
+* Ticket Status Tracking
+* Department-Based Employee Search
+* Multi-Agent Workflows
+* Docker Deployment
 
 ---
 
 ## Author
 
-Ankit Verma
+**Ankit Verma**
 
-MSc Applied Artificial Intelligence
-
-FastAPI | Machine Learning | AI Engineering | Python Development
+AI & Machine Learning Engineer | Python Developer
+```
+```

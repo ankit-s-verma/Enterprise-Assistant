@@ -1,9 +1,0 @@
-
-        '''
-        ```json
-        {
-        "intent": "EMPLOYEE_LOOKUP",
-        "employee_id": "E101"
-        }
-        ```
-        '''
