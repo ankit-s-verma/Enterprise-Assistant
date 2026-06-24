@@ -1,4 +1,4 @@
-# Enterprise HR Assistant
+# Enterprise HR Assistant v1.0
 
 An AI-powered enterprise assistant built with FastAPI, SQLite, and Google Gemini. The application can understand natural language requests, retrieve employee information, create support tickets, and answer general enterprise-related questions through a unified API interface.
 
