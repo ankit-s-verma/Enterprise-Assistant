@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from database import get_connection
+from app.database.database import get_connection
 
 def create_ticket(issue) -> dict:
     """

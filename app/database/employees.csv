@@ -1,0 +1,31 @@
+employee_id,employee_name,designation,department,email_id,phone_no
+E101,John Smith,Senior Software Engineer,Engineering,john.smith@company.com,+91-9876543201
+E102,Sarah Johnson,Finance Manager,Finance,sarah.johnson@company.com,+91-9876543202
+E103,David Lee,HR Specialist,Human Resources,david.lee@company.com,+91-9876543203
+E104,Emily Brown,Marketing Executive,Marketing,emily.brown@company.com,+91-9876543204
+E105,Michael Wilson,Software Engineer,Engineering,michael.wilson@company.com,+91-9876543205
+E106,Jessica Davis,Sales Executive,Sales,jessica.davis@company.com,+91-9876543206
+E107,Daniel Miller,Operations Analyst,Operations,daniel.miller@company.com,+91-9876543207
+E108,Olivia Garcia,Customer Success Associate,Customer Success,olivia.garcia@company.com,+91-9876543208
+E109,James Martinez,Financial Analyst,Finance,james.martinez@company.com,+91-9876543209
+E110,Sophia Anderson,Engineering Manager,Engineering,sophia.anderson@company.com,+91-9876543210
+E111,William Thomas,Legal Counsel,Legal,william.thomas@company.com,+91-9876543211
+E112,Ava Taylor,HR Manager,Human Resources,ava.taylor@company.com,+91-9876543212
+E113,Benjamin Moore,DevOps Engineer,Engineering,benjamin.moore@company.com,+91-9876543213
+E114,Mia Jackson,Marketing Manager,Marketing,mia.jackson@company.com,+91-9876543214
+E115,Lucas White,Sales Manager,Sales,lucas.white@company.com,+91-9876543215
+E116,Charlotte Harris,Customer Success Manager,Customer Success,charlotte.harris@company.com,+91-9876543216
+E117,Henry Martin,Backend Developer,Engineering,henry.martin@company.com,+91-9876543217
+E118,Amelia Thompson,Operations Manager,Operations,amelia.thompson@company.com,+91-9876543218
+E119,Alexander Clark,Senior Accountant,Finance,alexander.clark@company.com,+91-9876543219
+E120,Evelyn Rodriguez,Corporate Lawyer,Legal,evelyn.rodriguez@company.com,+91-9876543220
+E121,Matthew Lewis,Data Engineer,Engineering,matthew.lewis@company.com,+91-9876543221
+E122,Harper Walker,Business Development Executive,Sales,harper.walker@company.com,+91-9876543222
+E123,Joseph Hall,Operations Coordinator,Operations,joseph.hall@company.com,+91-9876543223
+E124,Abigail Allen,Digital Marketing Specialist,Marketing,abigail.allen@company.com,+91-9876543224
+E125,Samuel Young,Customer Success Executive,Customer Success,samuel.young@company.com,+91-9876543225
+E126,Grace King,Frontend Developer,Engineering,grace.king@company.com,+91-9876543226
+E127,Jack Wright,QA Engineer,Engineering,jack.wright@company.com,+91-9876543227
+E128,Lily Scott,Recruitment Specialist,Human Resources,lily.scott@company.com,+91-9876543228
+E129,Ethan Green,Finance Executive,Finance,ethan.green@company.com,+91-9876543229
+E130,Chloe Baker,Technical Support Engineer,IT Support,chloe.baker@company.com,+91-9876543230

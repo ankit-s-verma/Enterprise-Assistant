@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from models import QuestionRequest
-from ai_agent import perform_actions, answer_general_questions
-from employee_data import get_employee_by_id, get_employee_by_name
-from ticket_service import create_ticket, get_all_ticket
+from app.models.models import QuestionRequest
+from app.agents.ai_agent import perform_actions, answer_general_questions
+from app.services.employee_data import get_employee_by_id, get_employee_by_name
+from app.services.ticket_service import create_ticket, get_all_ticket
 
 app = FastAPI(
     title='Fluid Assistant',

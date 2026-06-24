@@ -1,4 +1,4 @@
-from database import get_connection
+from app.database.database import get_connection
 import warnings
 warnings.filterwarnings('ignore')
 
