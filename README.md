@@ -391,6 +391,7 @@ The application is organized into dedicated modules for AI processing, database 
 ## Author
 
 **Ankit Verma**
+
 AI & Machine Learning Engineer | Python Developer
 ```
 ```
