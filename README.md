@@ -111,7 +111,7 @@ enterprise-hr-assistant/
 ├── company.db
 ├── employees.csv
 ├── requirements.txt
-├── .env
+├── Systems Architecture.png
 └── README.md
 ```
 
