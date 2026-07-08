@@ -1,57 +1,55 @@
-import uuid
-from datetime import datetime
-from app.database.database import get_connection
+from sqlalchemy.orm import Session
+from app.models.ticket import Ticket
+from app.repositories.ticket_repo import TicketRepository
+from app.utils.ticket_utils import TicketStatus
 
-def create_ticket(issue) -> dict:
-    """
-    Creates a new ticket in the ticket database.
-    """
-    conn = get_connection()
-    ticket_id = f"INC-{str(uuid.uuid4())[:8]}"
+def create_ticket(db:Session, ticket_id:str, issue:str, status:TicketStatus.OPEN) -> dict:
+    repository = TicketRepository(db)
+    ticket = Ticket(ticket_id=ticket_id, issue=issue, status=status)
 
-    cursor = conn.cursor()
-
-    cursor.execute("""
-            INSERT INTO ticket VALUES (?,?,?)""",
-            (
-                ticket_id,
-                issue,
-                datetime.now().isoformat()
-            ))
-    conn.commit()
-    conn.close()
+    ticket = repository.create_ticket(ticket)
 
     return {
-        "ticket_id" : ticket_id,
-        "issue" : issue
+        "ticket_id" : ticket.ticket_id,
+        "issue" : ticket.issue,
+        "status" : ticket.status.value
     }
 
-def get_all_ticket() -> dict:
-    """
-    Returns all the tickets from the ticket database in a JSON format. eg - {'ticket_id' : '1234'}
-    """
-    conn = get_connection()
-    cursor = conn.cursor()
+def get_ticket_by_id(db:Session, t_id:str) -> dict | str:
+    repo = TicketRepository(db)
+    
+    ticket = repo.get_ticket_by_id(t_id)
 
-    cursor.execute("""select * from ticket""")
+    if ticket is None:
+        return f'Ticket {t_id} not found'
+    
+    return {
+        "ticket_id" : ticket.ticket_id,
+        "issue" : ticket.issue,
+        "status" : ticket.status.value
+    }
 
-    rows = cursor.fetchall()
+def get_all_ticket(db:Session) -> list[dict]:
+    repo = TicketRepository(db)
+    tickets = repo.get_all_tickets()
 
-    return [dict(row) for row in rows]
+    return [{
+        "ticket_id" : ticket.ticket_id,
+        "issue" : ticket.issue,
+        "status" : ticket.status.value
+        }
+        for ticket in tickets
+    ]
 
-def get_ticket_info(ticket_id) -> dict | None:
-    conn = get_connection()
-    cursor = conn.cursor()
+def update_ticket_status(db: Session, ticket_id : str, status: TicketStatus) -> dict | None:
+    repo = TicketRepository(db)
+    ticket = repo.update_ticket_status(ticket_id=ticket_id, status=status)
 
-    cursor.execute("""select * from ticket where ticket_id = ?""", (ticket_id,))
-
-    ticket_info = cursor.fetchone()
-
-    conn.close()
-
-    return dict(ticket_info) if  ticket_info else None
-
-if __name__ == "__main__":
-    pass
-    # print(get_all_ticket())
-    # print(create_ticket('System broken'))
+    if ticket is None:
+        return None
+    
+    return {
+        "ticket_id": ticket.ticket_id,
+        "issue": ticket.issue,
+        "status": ticket.status.value
+    }
