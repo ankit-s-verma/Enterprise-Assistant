@@ -17,8 +17,8 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(
-    title='Fluid Assistant',
-    version="1.0",
+    title='Enterprise Assistant',
+    version="2.0",
     lifespan=lifespan
 )
 register_exception_handlers(app)

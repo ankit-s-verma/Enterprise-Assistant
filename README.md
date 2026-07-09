@@ -1,359 +1,335 @@
-# Enterprise HR Assistant v1.0
+# Enterprise Assistant v2.0
 
-An AI-powered enterprise assistant built with FastAPI, SQLite, and Google Gemini. The application can understand natural language requests, retrieve employee information, create support tickets, and answer general enterprise-related questions through a unified API interface.
-
----
-
-## Highlights
-
-* AI-powered intent extraction using Google Gemini
-* Employee information retrieval from SQLite
-* Support ticket creation workflow
-* FastAPI REST API with interactive Swagger documentation
-* Pydantic request validation
-* Structured tool-routing architecture
-* Persistent ticket storage
-* Modular service-based backend design
-* Error handling and fallback logic
+An AI-powered Enterprise Assistant built with **FastAPI**, **Groq**, **PostgreSQL**, and **ChromaDB** that enables employees to retrieve company knowledge, search employee information, manage IT support tickets, and maintain context-aware conversations through Retrieval-Augmented Generation (RAG) and persistent conversation memory.
 
 ---
 
-## System Architecture
+## Overview
 
-![System Architecture](screenshots/architecture.png)
+Enterprise Assistant is a backend application that demonstrates how Large Language Models can be integrated into enterprise software using modern backend technologies.
+
+The application combines Retrieval-Augmented Generation (RAG), structured business data, authentication, and conversational memory into a single API capable of understanding user intent and performing multiple enterprise workflows.
+
+The project has been designed using a modular architecture that separates authentication, business logic, database operations, AI orchestration, and retrieval pipelines to ensure maintainability and scalability.
 
 ---
 
 ## Features
 
-### Employee Information Lookup
-
-Retrieve employee information using natural language queries.
-
-**Examples**
-
-```text
-Show details of employee E105
-Get information about Sarah Johnson
-Find employee E110
-```
-
-### IT Support Ticket Creation
-
-Create support tickets through conversational requests.
-
-**Examples**
-
-```text
-Create a ticket for VPN connectivity issues
-Unable to login to company portal
-My laptop is not working
-```
-
-### General Enterprise Queries
-
-Answer HR and enterprise-related questions using an LLM.
-
-**Examples**
-
-```text
-What is employee onboarding?
-What is the leave approval process?
-Explain the onboarding workflow
-```
-
-### AI-Powered Intent Routing
-
-The assistant uses a language model to classify user intent and route requests to the appropriate business workflow rather than relying on hardcoded keyword matching.
+* AI-powered conversational assistant using Groq LLM
+* Retrieval-Augmented Generation (RAG) using ChromaDB
+* Employee directory search
+* IT support ticket creation and retrieval
+* JWT-based authentication and authorization
+* Persistent conversation memory
+* PostgreSQL database with SQLAlchemy ORM
+* Alembic database migrations
+* Dockerized deployment
+* Automatic interactive API documentation using FastAPI Swagger
 
 ---
 
 ## Technology Stack
 
-### Backend
-
-* FastAPI
-* Python 3.11
-
-### Database
-
-* SQLite
-
-### AI Layer
-
-* Google Gemini
-* Intent Extraction
-* Tool Routing
-
-### Validation
-
-* Pydantic
+| Category           | Technologies           |
+| ------------------ | ---------------------- |
+| Backend            | FastAPI                |
+| Language           | Python                 |
+| ORM                | SQLAlchemy 2.0         |
+| Database           | PostgreSQL             |
+| Authentication     | JWT                    |
+| AI Provider        | Groq                   |
+| LLM Framework      | LangChain              |
+| Vector Database    | ChromaDB               |
+| Embedding Model    | Sentence Transformers  |
+| Database Migration | Alembic                |
+| Containerization   | Docker, Docker Compose |
 
 ---
-## Demo Screenshots
 
-### Swagger UI
+## System Architecture
 
-![Swagger UI](screenshots/swagger-ui.png)
+> Replace the image below with your updated architecture diagram.
 
-### Employee Lookup
-
-![Employee Lookup](screenshots/employee-lookup.png)
-
-### Ticket Generation
-
-![Ticket Generation](screenshots/ticket-generation.png)
-
-### General Query
-
-![General Query](screenshots/general-query.png)
-
-### All Tickets
-
-![All Tickets](screenshots/all-tickets.png)
+```text
+                Client
+                   │
+                   ▼
+            FastAPI Application
+                   │
+        ┌──────────┼──────────┐
+        │          │          │
+        ▼          ▼          ▼
+ Authentication  Assistant   Ticket Service
+                     │
+          ┌──────────┼──────────┐
+          │          │          │
+          ▼          ▼          ▼
+     PostgreSQL   ChromaDB   Groq API
+```
 
 ---
+
 ## Project Structure
 
 ```text
-enterprise-hr-assistant/
+Enterprise-Assistant/
 │
+├── alembic/
 ├── app/
-│   │
-│   ├── main.py
-│   │
-│   ├── agents/
-│   │   └── ai_agent.py
-│   │
+│   ├── auth/
+│   ├── core/
 │   ├── database/
-│   │   ├── database.py
-│   │   └── employees.db
-│   │
-│   ├── services/
-│   │   ├── employee_service.py
-│   │   └── ticket_service.py
-│   │
 │   ├── models/
-│   │   └── models.py
-│   │
-│   └── data/
-│       └── employees.csv
+│   ├── rag/
+│   ├── routers/
+│   ├── services/
+│   └── utils/
 │
 ├── screenshots/
-│   ├── architecture.png
-│   ├── swagger-ui.png
-│   ├── employee-lookup.png
-│   ├── ticket-generation.png
-│   ├── all-tickets.png
-│   └── general-query.png
-│
-├── .gitignore
+├── Dockerfile
+├── docker-compose.yml
 ├── requirements.txt
 ├── README.md
-└── LICENSE
+├── API_DOCUMENTATION.md
+├── .env.example
+└── alembic.ini
 ```
+
+---
+
+## Core Components
+
+### Authentication
+
+Users authenticate using JWT tokens. Protected endpoints require a valid bearer token before requests are processed.
+
+---
+
+### Enterprise Assistant
+
+The Assistant Service acts as the central orchestration layer.
+
+It is responsible for:
+
+* Intent classification
+* Employee lookup
+* Ticket management
+* RAG-based question answering
+* Conversation memory integration
+* Response generation
+
+---
+
+### Retrieval-Augmented Generation (RAG)
+
+The RAG pipeline retrieves relevant company documents from ChromaDB before sending context to the language model.
+
+Workflow:
+
+1. User submits a question.
+2. Relevant documents are retrieved.
+3. Context is combined with the prompt.
+4. Groq generates the final response.
+
+This approach produces responses grounded in organizational knowledge instead of relying solely on the language model.
+
+---
+
+### Conversation Memory
+
+Conversation history is stored in PostgreSQL.
+
+Each conversation receives a unique `conversation_id`, allowing follow-up questions to retain context throughout the interaction.
+
+---
+
+### Ticket Management
+
+The assistant can:
+
+* Create support tickets
+* Retrieve existing tickets
+* Answer ticket-related questions
+
+The user interacts naturally without needing separate endpoints for different ticket operations.
+
+---
+
+### Employee Directory
+
+The assistant can retrieve employee information such as:
+
+* Name
+* Department
+* Email
+* Position
+
+through natural language queries.
 
 ---
 
 ## Installation
 
-### Clone the Repository
+### Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/enterprise-hr-assistant.git
-cd enterprise-hr-assistant
+git clone <repository-url>
+cd Enterprise-Assistant
 ```
 
-### Create Virtual Environment
+---
 
-#### Windows
+### Create the environment file
+
+Copy the example configuration.
+
+```bash
+cp .env.example .env
+```
+
+Update the values with your own credentials.
+
+---
+
+### Docker Deployment
+
+Build and start the application.
+
+```bash
+docker compose up --build
+```
+
+Run in detached mode.
+
+```bash
+docker compose up -d
+```
+
+Stop the containers.
+
+```bash
+docker compose down
+```
+
+---
+
+## Local Development
+
+Create a virtual environment.
 
 ```bash
 python -m venv venv
+```
+
+Activate the environment.
+
+Windows
+
+```bash
 venv\Scripts\activate
 ```
 
-#### Linux / Mac
+Linux/macOS
 
 ```bash
-python -m venv venv
 source venv/bin/activate
 ```
 
-### Install Dependencies
+Install dependencies.
 
 ```bash
 pip install -r requirements.txt
+```
+
+Run the application.
+
+```bash
+uvicorn app.main:app --reload
 ```
 
 ---
 
 ## Environment Variables
 
-Create a `.env` file in the project root.
+The application uses environment variables for configuration.
 
-```env
-GEMINI_API_KEY=your_api_key_here
-```
-
----
-
-## Running the Application
-
-Start the FastAPI server:
-
-```bash
-uvicorn app.main:app --reload
-```
-
-Application URL:
+Example:
 
 ```text
-http://127.0.0.1:8000
+DATABASE_URL=
+
+LLM_PROVIDER=
+
+LLM_API_KEY=
+
+LLM_MODEL=
+
+SECRET_KEY=
+
+ALGORITHM=HS256
+
+ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
-Interactive API Documentation:
+A complete template is provided in `.env.example`.
+
+---
+
+## API Documentation
+
+Interactive Swagger documentation is available once the application is running.
 
 ```text
-http://127.0.0.1:8000/docs
+http://localhost:8000/docs
 ```
 
----
-
-## API Usage
-
-### POST /ask
-
-#### Request
-
-```json
-{
-  "question": "Show details of employee E105"
-}
-```
-
-#### Employee Lookup Response
-
-```json
-{
-  "success": true,
-  "action": "employee_lookup",
-  "data": {
-    "employee_id": "E105",
-    "employee_name": "Michael Wilson",
-    "designation": "Software Engineer",
-    "department": "Engineering",
-    "email_id": "michael.wilson@company.com",
-    "phone_no": "+91-9876543205"
-  }
-}
-```
-
----
-
-#### Ticket Creation Request
-
-```json
-{
-  "question": "Unable to login to company portal"
-}
-```
-
-#### Ticket Creation Response
-
-```json
-{
-  "success": true,
-  "action": "ticket_created",
-  "data": {
-    "ticket_id": "INC-12345",
-    "status": "OPEN"
-  }
-}
-```
-
----
-
-## AI Workflow
-
-### Step 1: User Query
+Detailed API documentation can be found in:
 
 ```text
-Show details of employee E105
+API_DOCUMENTATION.md
 ```
-
-### Step 2: Intent Extraction
-
-The language model converts the natural language query into structured data.
-
-```json
-{
-  "action": "EMPLOYEE_LOOKUP",
-  "employee_id": "E105"
-}
-```
-
-### Step 3: Tool Routing
-
-The application routes the request to the appropriate business service.
-
-```text
-EMPLOYEE_LOOKUP
-      ↓
-Employee Service
-      ↓
-SQLite Query
-```
-
-### Step 4: Response Generation
-
-The result is returned to the user through the API.
 
 ---
 
-## Key Concepts Demonstrated
+## Screenshots
 
-* FastAPI API Development
-* RESTful Service Design
-* Large Language Model Integration
-* AI Agent Workflows
-* Tool Calling / Function Routing
-* SQLite Database Operations
-* Request Validation with Pydantic
-* Error Handling and Fallback Logic
-* Service-Oriented Architecture
-* Enterprise Workflow Automation
+Add screenshots demonstrating:
+
+* Login
+* Swagger UI
+* Employee lookup
+* Ticket management
+* AI assistant responses
 
 ---
 
-## Design Decisions
+## Security
 
-### SQLite vs PostgreSQL
+The project incorporates several security best practices:
 
-SQLite was selected to simplify deployment while still demonstrating database integration and persistence. The architecture can be migrated to PostgreSQL with minimal modifications.
-
-### LLM-Based Routing vs Keyword Matching
-
-The assistant uses AI-driven intent extraction instead of hardcoded keyword matching. This approach provides greater flexibility and serves as a foundation for future agent-based workflows.
-
-### Modular Architecture
-
-The application is organized into dedicated modules for AI processing, database operations, business services, and API endpoints to improve maintainability and scalability.
+* JWT authentication
+* Password hashing using bcrypt
+* Environment-based secret management
+* SQLAlchemy ORM to prevent SQL injection
+* Input validation using Pydantic
+* Centralized exception handling
 
 ---
 
-## Future Enhancements
+## Deployment
 
-* PostgreSQL Integration
-* SQLAlchemy ORM
-* User Authentication
-* Role-Based Access Control (RBAC)
-* Retrieval-Augmented Generation (RAG)
-* Conversation Memory
-* Ticket Status Tracking
-* Department-Based Employee Search
-* Multi-Agent Workflows
-* Docker Deployment
+The application has been designed for containerized deployment and is compatible with platforms such as Render, Azure App Service, Azure Container Apps, AWS ECS, and Google Cloud Run.
+
+Due to free-tier limitations around persistent storage for the vector database, a public deployment is not currently maintained.
+
+The application can be launched locally using Docker Compose using the setup instructions provided in this repository.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
 
 ---
 
@@ -361,6 +337,10 @@ The application is organized into dedicated modules for AI processing, database 
 
 **Ankit Verma**
 
-AI & Machine Learning Engineer | Python Developer
-```
-```
+MSc Applied Artificial Intelligence
+
+Backend & AI Developer
+
+GitHub: (*https://github.com/ankit-s-verma*)
+
+LinkedIn: (*https://www.linkedin.com/in/ankit-s-verma/*)
