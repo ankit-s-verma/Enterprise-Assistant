@@ -313,7 +313,7 @@ The application can be launched locally using Docker Compose using the setup ins
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -323,7 +323,7 @@ This project is licensed under the MIT License.
 
 MSc Applied Artificial Intelligence
 
-Backend & AI Developer
+AI & Machine Learning Engineer | Python Developer
 
 GitHub: (*https://github.com/ankit-s-verma*)
 
