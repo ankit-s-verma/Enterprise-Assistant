@@ -49,24 +49,8 @@ The project has been designed using a modular architecture that separates authen
 
 ## System Architecture
 
-> Replace the image below with your updated architecture diagram.
 
-```text
-                Client
-                   │
-                   ▼
-            FastAPI Application
-                   │
-        ┌──────────┼──────────┐
-        │          │          │
-        ▼          ▼          ▼
- Authentication  Assistant   Ticket Service
-                     │
-          ┌──────────┼──────────┐
-          │          │          │
-          ▼          ▼          ▼
-     PostgreSQL   ChromaDB   Groq API
-```
+![Enterprise Assistant System Architecture](screenshots/systems-architecture.png)
 
 ---
 
@@ -329,7 +313,7 @@ The application can be launched locally using Docker Compose using the setup ins
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -339,7 +323,7 @@ This project is licensed under the MIT License.
 
 MSc Applied Artificial Intelligence
 
-Backend & AI Developer
+AI & Machine Learning Engineer | Python Developer
 
 GitHub: (*https://github.com/ankit-s-verma*)
 
