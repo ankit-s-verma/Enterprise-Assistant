@@ -51,21 +51,8 @@ The project has been designed using a modular architecture that separates authen
 
 > Replace the image below with your updated architecture diagram.
 
-```text
-                Client
-                   │
-                   ▼
-            FastAPI Application
-                   │
-        ┌──────────┼──────────┐
-        │          │          │
-        ▼          ▼          ▼
- Authentication  Assistant   Ticket Service
-                     │
-          ┌──────────┼──────────┐
-          │          │          │
-          ▼          ▼          ▼
-     PostgreSQL   ChromaDB   Groq API
+```
+![Enterprise Assistant System Architecture](screenshots/system-architecture.png)
 ```
 
 ---
