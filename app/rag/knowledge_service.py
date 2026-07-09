@@ -1,5 +1,4 @@
 from langchain_core.documents import Document
-from app.llm.prompts import get_rag_prompt
 from app.rag.embeddings import embedding_service
 from app.rag.vector_store import vector_store
 from app.rag.config import TOP_K

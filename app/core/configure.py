@@ -27,5 +27,4 @@ class Settings:
             raise ValueError(f"Missing required environment variable : {key}")
         return value
 
-# Singleton instance (this instance can be imported throughout the project)
 settings = Settings()

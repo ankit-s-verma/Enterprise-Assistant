@@ -1,6 +1,5 @@
-from sqlalchemy import String, DateTime, func, Enum
+from sqlalchemy import String, Enum
 from sqlalchemy.orm import Mapped, mapped_column
-from datetime import datetime
 from app.utils.ticket_utils import TicketStatus
 
 from app.database.database import Base

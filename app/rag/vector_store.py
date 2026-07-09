@@ -40,5 +40,4 @@ class VectorStore:
         self.client.delete_collection(COLLECTION_NAME)
         self.collection = self.client.get_or_create_collection(name=COLLECTION_NAME)
 
-# Singleton instance
 vector_store = VectorStore()
