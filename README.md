@@ -51,9 +51,7 @@ The project has been designed using a modular architecture that separates authen
 
 > Replace the image below with your updated architecture diagram.
 
-```
-![Enterprise Assistant System Architecture](screenshots/system-architecture.png)
-```
+![Enterprise Assistant System Architecture] (screenshots/system-architecture.png)
 
 ---
 
