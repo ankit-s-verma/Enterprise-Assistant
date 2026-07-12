@@ -2,15 +2,15 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-from app.database.database import Base
-from app.models.user import User
-from app.models.employees import Employee
-from app.models.ticket import Ticket
-from app.models.conversation import Conversation
-from app.models.conversation_message import ConversationMessage
-from app.models.user import User
-from app.models.conversation import Conversation
-from app.models.conversation_message import ConversationMessage
+from backend.database.database import Base
+from backend.models.user import User
+from backend.models.employees import Employee
+from backend.models.ticket import Ticket
+from backend.models.conversation import Conversation
+from backend.models.conversation_message import ConversationMessage
+from backend.models.user import User
+from backend.models.conversation import Conversation
+from backend.models.conversation_message import ConversationMessage
 from alembic import context
 
 target_metadata = Base.metadata

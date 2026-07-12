@@ -1,330 +1,281 @@
-# Enterprise Assistant v2.0
+# Enterprise HR Assistant
 
-An AI-powered Enterprise Assistant built with **FastAPI**, **Groq**, **PostgreSQL**, and **ChromaDB** that enables employees to retrieve company knowledge, search employee information, manage IT support tickets, and maintain context-aware conversations through Retrieval-Augmented Generation (RAG) and persistent conversation memory.
+<p align="center">
+  <img src="screenshots/general-questions.png" alt="Enterprise Assistant" width="900">
+</p>
 
----
+![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker)
+![LangGraph](https://img.shields.io/badge/LangGraph-AI_Workflow-black?style=for-the-badge)
+![Groq](https://img.shields.io/badge/Groq-LLM-orange?style=for-the-badge)
 
-## Overview
+</p>
 
-Enterprise Assistant is a backend application that demonstrates how Large Language Models can be integrated into enterprise software using modern backend technologies.
-
-The application combines Retrieval-Augmented Generation (RAG), structured business data, authentication, and conversational memory into a single API capable of understanding user intent and performing multiple enterprise workflows.
-
-The project has been designed using a modular architecture that separates authentication, business logic, database operations, AI orchestration, and retrieval pipelines to ensure maintainability and scalability.
-
----
-
-## Features
-
-* AI-powered conversational assistant using Groq LLM
-* Retrieval-Augmented Generation (RAG) using ChromaDB
-* Employee directory search
-* IT support ticket creation and retrieval
-* JWT-based authentication and authorization
-* Persistent conversation memory
-* PostgreSQL database with SQLAlchemy ORM
-* Alembic database migrations
-* Dockerized deployment
-* Automatic interactive API documentation using FastAPI Swagger
+An AI-powered **Enterprise HR Assistant** that enables employees to search employee information, create and manage IT support tickets, and ask organization-specific questions through natural language conversations. The application combines **LangGraph**, **Retrieval-Augmented Generation (RAG)**, **Groq LLM**, **FastAPI**, **React**, and **PostgreSQL** to deliver a modern enterprise AI experience.
 
 ---
 
-## Technology Stack
-
-| Category           | Technologies           |
-| ------------------ | ---------------------- |
-| Backend            | FastAPI                |
-| Language           | Python                 |
-| ORM                | SQLAlchemy 2.0         |
-| Database           | PostgreSQL             |
-| Authentication     | JWT                    |
-| AI Provider        | Groq                   |
-| LLM Framework      | LangChain              |
-| Vector Database    | ChromaDB               |
-| Embedding Model    | Sentence Transformers  |
-| Database Migration | Alembic                |
-| Containerization   | Docker, Docker Compose |
-
----
-
-## System Architecture
-
-
-![Enterprise Assistant System Architecture](screenshots/systems-architecture.png)
-
----
-
-## Project Structure
-
-```text
-Enterprise-Assistant/
-│
-├── alembic/
-├── app/
-│   ├── auth/
-│   ├── core/
-│   ├── database/
-│   ├── models/
-│   ├── rag/
-│   ├── routers/
-│   ├── services/
-│   └── utils/
-│
-├── screenshots/
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
-├── README.md
-├── API_DOCUMENTATION.md
-├── .env.example
-└── alembic.ini
-```
-
----
-
-## Core Components
+# Features
 
 ### Authentication
 
-Users authenticate using JWT tokens. Protected endpoints require a valid bearer token before requests are processed.
+- JWT Authentication
+- Protected Routes
+- Auto Login
+- Logout
+- Axios Request & Response Interceptors
 
----
+### AI Assistant
 
-### Enterprise Assistant
+- General HR conversations
+- Company policy Q&A using RAG
+- Context-aware follow-up questions
+- Conversation memory
 
-The Assistant Service acts as the central orchestration layer.
+### Employee Management
 
-It is responsible for:
-
-* Intent classification
-* Employee lookup
-* Ticket management
-* RAG-based question answering
-* Conversation memory integration
-* Response generation
-
----
-
-### Retrieval-Augmented Generation (RAG)
-
-The RAG pipeline retrieves relevant company documents from ChromaDB before sending context to the language model.
-
-Workflow:
-
-1. User submits a question.
-2. Relevant documents are retrieved.
-3. Context is combined with the prompt.
-4. Groq generates the final response.
-
-This approach produces responses grounded in organizational knowledge instead of relying solely on the language model.
-
----
-
-### Conversation Memory
-
-Conversation history is stored in PostgreSQL.
-
-Each conversation receives a unique `conversation_id`, allowing follow-up questions to retain context throughout the interaction.
-
----
+- Employee Search
+- Employee Profile Cards
+- Context-aware employee follow-ups
 
 ### Ticket Management
 
-The assistant can:
+- Ticket Search
+- Ticket Creation
+- Ticket Updates
+- Ticket Cards
+- Ticket conversational memory
 
-* Create support tickets
-* Retrieve existing tickets
-* Answer ticket-related questions
+### Frontend
 
-The user interacts naturally without needing separate endpoints for different ticket operations.
+- Modern React UI
+- Dark enterprise theme
+- Responsive layout
+- Thinking indicator
+- New conversation support
 
----
+### Deployment
 
-### Employee Directory
-
-The assistant can retrieve employee information such as:
-
-* Name
-* Department
-* Email
-* Position
-
-through natural language queries.
-
----
-
-## Installation
-
-### Clone the repository
-
-```bash
-git clone <repository-url>
-cd Enterprise-Assistant
-```
+- Dockerized frontend
+- Dockerized backend
+- PostgreSQL
+- Docker Compose
 
 ---
 
-### Create the environment file
+# System Architecture
 
-Copy the example configuration.
-
-```bash
-cp .env.example .env
-```
-
-Update the values with your own credentials.
+<p align="center">
+<img src="screenshots/system-architecture.png" width="900">
+</p>
 
 ---
 
-### Docker Deployment
+# Technology Stack
 
-Build and start the application.
+| Category | Technologies |
+|------------|--------------|
+| Frontend | React 18, TypeScript, Tailwind CSS, Vite |
+| Backend | FastAPI, Python |
+| AI | LangGraph, LangChain, Groq |
+| Database | PostgreSQL, SQLAlchemy |
+| Vector Store | ChromaDB |
+| Authentication | JWT |
+| Containerization | Docker, Docker Compose |
+| Web Server | Nginx |
 
-```bash
-docker compose up --build
-```
+---
 
-Run in detached mode.
+# Project Structure
 
-```bash
-docker compose up -d
-```
-
-Stop the containers.
-
-```bash
-docker compose down
+```text
+Enterprise-HR-Assistant/
+│
+├── alembic/
+│
+├── backend/
+│   ├── auth/
+│   ├── chroma_db/
+│   ├── core/
+│   ├── database/
+│   ├── knowledge_base/
+│   ├── llm/
+│   ├── memory/
+│   ├── models/
+│   ├── rag/
+│   ├── repositories/
+│   ├── routes/
+│   ├── schemas/
+│   ├── services/
+│   ├── utils/
+│   ├── Dockerfile
+│   ├── main.py
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── types/
+│   │   ├── utils/
+│   │   └── App.tsx
+│   │
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── screenshots/
+│
+├── docker-compose.yml
+├── API_Documentation.md
+├── README.md
+├── LICENSE
+└── .env.example
 ```
 
 ---
 
-## Local Development
+# Screenshots
 
-Create a virtual environment.
+## Login
+
+![Login](screenshots/login-ui.png)
+
+---
+
+## Chat Interface
+
+![Chat](screenshots/chat-interface.png)
+
+---
+
+## Employee Search
+
+![Employee](screenshots/employee-search.png)
+
+---
+
+## Ticket Search
+
+![Ticket](screenshots/ticket-search.png)
+
+---
+
+## Ticket Creation & Update
+
+![Ticket Creation & Update](screenshots/ticket-processing.png)
+
+---
+
+# Getting Started
+
+## Clone Repository
 
 ```bash
-python -m venv venv
-```
+git clone https://github.com/ankit-s-verma/Enterprise-HR-Assistant.git
 
-Activate the environment.
-
-Windows
-
-```bash
-venv\Scripts\activate
-```
-
-Linux/macOS
-
-```bash
-source venv/bin/activate
-```
-
-Install dependencies.
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the application.
-
-```bash
-uvicorn app.main:app --reload
+cd Enterprise-HR-Assistant
 ```
 
 ---
 
 ## Environment Variables
 
-The application uses environment variables for configuration.
+Create a `.env` file in the project root.
 
-Example:
-
-```text
+```env
 DATABASE_URL=
-
-LLM_PROVIDER=
-
-LLM_API_KEY=
-
-LLM_MODEL=
 
 SECRET_KEY=
 
-ALGORITHM=HS256
+GROQ_API_KEY=
 
-ACCESS_TOKEN_EXPIRE_MINUTES=30
+MODEL_NAME=
+
+ACCESS_TOKEN_EXPIRE_MINUTES=60
 ```
-
-A complete template is provided in `.env.example`.
 
 ---
 
-## API Documentation
+## Run with Docker
 
-Interactive Swagger documentation is available once the application is running.
+The easiest way to run the application.
 
-```text
+```bash
+docker compose up --build
+```
+
+Application URLs:
+
+| Service | URL |
+|----------|-----|
+| Frontend | http://localhost |
+| Backend | http://localhost:8000 |
+| Swagger UI | http://localhost:8000/docs |
+
+---
+
+## Local Development
+
+### Backend
+
+```bash
+cd backend
+
+pip install -r requirements.txt
+
+uvicorn main:app --reload
+```
+
+### Frontend
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+---
+
+# API Documentation
+
+Interactive Swagger documentation is available at:
+
+```
 http://localhost:8000/docs
 ```
 
-Detailed API documentation can be found in:
+Detailed endpoint documentation can be found in:
 
-```text
-API_DOCUMENTATION.md
+```
+API_Documentation.md
 ```
 
 ---
 
-## Screenshots
-
-Add screenshots demonstrating:
-
-* Login
-* Swagger UI
-* Employee lookup
-* Ticket management
-* AI assistant responses
-
----
-
-## Security
-
-The project incorporates several security best practices:
-
-* JWT authentication
-* Password hashing using bcrypt
-* Environment-based secret management
-* SQLAlchemy ORM to prevent SQL injection
-* Input validation using Pydantic
-* Centralized exception handling
-
----
-
-## Deployment
-
-The application has been designed for containerized deployment and is compatible with platforms such as Render, Azure App Service, Azure Container Apps, AWS ECS, and Google Cloud Run.
-
-Due to free-tier limitations around persistent storage for the vector database, a public deployment is not currently maintained.
-
-The application can be launched locally using Docker Compose using the setup instructions provided in this repository.
-
----
-
-## License
+# License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Author
+# Author
 
-**Ankit Verma**
+## Ankit Verma
 
-MSc Applied Artificial Intelligence
+**AI & Machine Learning Engineer | Python Developer**
 
-AI & Machine Learning Engineer | Python Developer
+GitHub:
+https://github.com/ankit-s-verma
 
-GitHub: (*https://github.com/ankit-s-verma*)
-
-LinkedIn: (*https://www.linkedin.com/in/ankit-s-verma/*)
+LinkedIn:
+https://www.linkedin.com/in/ankit-s-verma/
