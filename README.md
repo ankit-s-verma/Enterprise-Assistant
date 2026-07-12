@@ -19,7 +19,8 @@ An AI-powered **Enterprise HR Assistant** that enables employees to search emplo
 
 ---
 
-[!IMPORTANT]
+IMPORTANT
+
 **First-Time Login Notice**
 
 This project does **not** include a user registration interface in the frontend yet. When running the application for the first time, no user credentials will exist in the database.
