@@ -70,7 +70,7 @@ An AI-powered **Enterprise HR Assistant** that enables employees to search emplo
 # System Architecture
 
 <p align="center">
-<img src="screenshots/system-architecture.png" width="900">
+<img src="screenshots/systems-architecture.png" width="900">
 </p>
 
 ---
