@@ -19,6 +19,17 @@ An AI-powered **Enterprise HR Assistant** that enables employees to search emplo
 
 ---
 
+[!IMPORTANT]
+**First-Time Login Notice**
+
+This project does **not** include a user registration interface in the frontend yet. When running the application for the first time, no user credentials will exist in the database.
+
+Before logging in through the web application, open the FastAPI Swagger documentation at **http://localhost:8000/docs** and use the **Register** endpoint to create your first user account. Once registered, you can log in through the frontend using those credentials.
+
+A dedicated user registration page will be added to the frontend in a future release.
+
+---
+
 # Features
 
 ### Authentication
